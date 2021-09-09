@@ -87,5 +87,10 @@ def matlab_syntax(string):
 
     return string
 
-print(matlab_syntax(mm_string))
-print(matlab_syntax(fm_string))
+#print(matlab_syntax(mm_string))
+#print(matlab_syntax(fm_string))
+
+linearizer = LM.to_linearizer(q_ind=[q], qd_ind=[dq])
+A, B = linearizer.linearize(A_and_B=True)
+print(A)
+print(B)
