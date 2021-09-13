@@ -18,5 +18,4 @@ par.g = 9.80665;
 
 par.Kr = 1;
 par.R = 1;
-par.L = 1e-5;
 
