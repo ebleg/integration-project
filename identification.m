@@ -57,6 +57,6 @@ z.Tstart = 0;
 z.TimeUnit = 's';
 
 %% Parameter identification
-opt = nlgreyestOptions('Display', 'on');
-
-sys = nlgreyest(z, idobj, opt);
+% opt = nlgreyestOptions('Display', 'on');
+% 
+% sys = nlgreyest(z, idobj, opt);

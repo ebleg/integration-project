@@ -16,7 +16,7 @@ d1, d2 = symbols("d1 d2")  # Location of link c.o.m. along axis
 I1, I2, Iball = symbols("I1 I2 Iball")  # Moments of inertia
 m1, m2, mball = symbols("m1 m2 mball")  # Masses
 g = symbols("g")
-τ = symbols("τ")  # Torque on system
+τ = dynamicsymbols("τ")  # Torque on system
 
 # Generalized coordinates
 q = dynamicsymbols("θ1 θ2")
@@ -81,16 +81,17 @@ def matlab_syntax(string):
 
     # Remove 'Derivative(phi, t)'
     string = re.sub(r'Derivative\((?P<symbol>\w*), t\)', lambda match: match.group('symbol') + '_dot', string)
+    string = re.sub(r'Derivative\((?P<symbol>\w*), \(t, 2\)\)', lambda match: match.group('symbol') + '_ddot', string)
 
     # Use caret symbol for powers
     string = string.replace("**", "^")
 
     return string
 
-#print(matlab_syntax(mm_string))
-#print(matlab_syntax(fm_string))
+# print(matlab_syntax(mm_string))
+# print(matlab_syntax(fm_string))
 
 linearizer = LM.to_linearizer(q_ind=[q], qd_ind=[dq])
-A, B = linearizer.linearize(A_and_B=True)
-print(A)
-print(B)
+A, B = linearizer.linearize(A_and_B=True, simplify=True)
+print(matlab_syntax(str(A)))
+print(matlab_syntax(str(B)))
